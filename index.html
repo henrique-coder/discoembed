@@ -1,48 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Metadata Configuration</title>
-    <meta property="og:type" content="video.other">
-    <meta property="og:image" id="og-image" content="">
-    <meta property="og:video:url" id="og-video-url" content="">
-    <meta property="og:video:width" id="og-video-width" content="">
-    <meta property="og:video:height" id="og-video-height" content="">
-    <script>
-        // Função para obter parâmetros da URL
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        // Função para atualizar o conteúdo da página com base nos parâmetros
-        function updateMetadata() {
-            const defaultThumbnail = 'https://small.fileditchstuff.me/s13/EDyvOoEJIxyiZCivfjJ.png';
-            const defaultWidth = '';
-            const defaultHeight = '';
-
-            const url = getQueryParam('url');
-            const thumbnail = getQueryParam('thumbnail') || defaultThumbnail;
-            const width = getQueryParam('width') || defaultWidth;
-            const height = getQueryParam('height') || defaultHeight;
-
-            if (url) {
-                document.getElementById('og-image').setAttribute('content', thumbnail);
-                document.getElementById('og-video-url').setAttribute('content', url);
-                document.getElementById('og-video-width').setAttribute('content', width);
-                document.getElementById('og-video-height').setAttribute('content', height);
-            } else {
-                document.body.innerHTML = '<h1>No video URL provided!</h1>';
-            }
-        }
-
-        // Atualiza a página quando o conteúdo for carregado
-        window.onload = updateMetadata;
-    </script>
+  <meta property="og:video:url" content="https://small.fileditchstuff.me/s13/LJJzUQAopuouNlyhYSun.mp4">
+  <meta property="og:image" content="https://small.fileditchstuff.me/s13/EDyvOoEJIxyiZCivfjJ.png">
+  <meta property="og:video:width" content="1920">
+  <meta property="og:video:height" content="1080">
+  <meta property="og:type" content="video.other">
 </head>
-<body>
-    <h1>Video Metadata Configuration</h1>
-    <p>Check the metadata for the video configured through the URL parameters.</p>
-</body>
-</html>
