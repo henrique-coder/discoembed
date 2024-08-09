@@ -3,17 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Metadata</title>
+    <title>Video Metadata Configuration</title>
     <meta property="og:image" content="" id="og-image">
     <meta property="og:type" content="video.other">
     <meta property="og:video:url" content="" id="og-video-url">
     <meta property="og:video:width" content="" id="og-video-width">
     <meta property="og:video:height" content="" id="og-video-height">
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Video Metadata Configuration</h1>
-    <p id="error-message" class="hidden">Error: Video URL not provided.</p>
-    <script src="script.js"></script>
+    <p id="error-message" style="color: red; font-weight: bold; display: none;">Error: Video URL not provided.</p>
+
+    <script>
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const ogImage = document.getElementById("og-image");
+            const ogVideoUrl = document.getElementById("og-video-url");
+            const ogVideoWidth = document.getElementById("og-video-width");
+            const ogVideoHeight = document.getElementById("og-video-height");
+            const errorMessage = document.getElementById("error-message");
+
+            const url = getParameterByName('url');
+            const thumbnail = getParameterByName('thumbnail') || 'https://small.fileditchstuff.me/s13/EDyvOoEJIxyiZCivfjJ.png';
+            const width = getParameterByName('width') || '';
+            const height = getParameterByName('height') || '';
+
+            if (url) {
+                ogImage.content = thumbnail;
+                ogVideoUrl.content = url;
+                ogVideoWidth.content = width;
+                ogVideoHeight.content = height;
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
