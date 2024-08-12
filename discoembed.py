@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 # Setup Flask cache
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
-logger.info(f'Flask cache enabled. Cache type: {cache.config['CACHE_TYPE']}')
+logger.info(f'Flask cache enabled. Cache type: {cache.config["CACHE_TYPE"]}')
 
 # Setup Talisman for security headers
 talisman = Talisman(app, content_security_policy={'default-src': ["'self'", 'https://cdnjs.cloudflare.com'], 'style-src': ["'self'", "'unsafe-inline'", 'https://cdnjs.cloudflare.com'], 'script-src': ["'self'", 'https://cdnjs.cloudflare.com']})
@@ -92,5 +92,5 @@ if __name__ == '__main__':
     app.template_folder = Path(current_path, config['flask']['templateFolder'])
 
     # Run the web server with the specified configuration
-    logger.info(f'Starting web server at {config['flask']['host']}:{config['flask']['port']}')
+    logger.info(f'Starting web server at {config["flask"]["host"]}:{config["flask"]["port"]}')
     app.run(debug=True, host=config['flask']['host'], port=config['flask']['port'], threaded=config['flask']['threadedServer'])
