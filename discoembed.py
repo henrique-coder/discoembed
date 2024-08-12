@@ -76,7 +76,7 @@ def embed() -> Tuple[render_template_string, HTTPStatus]:
     try:
         width = int(width)
         height = int(height)
-    except ValueError:
+    except (TypeError, ValueError):
         width, height = '', ''
 
     # Return the embed HTML
