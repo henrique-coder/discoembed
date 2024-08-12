@@ -1,0 +1,16 @@
+faker
+faker
+flask
+flask-caching
+flask-compress
+flask-cors
+flask-limiter
+flask-talisman
+flask-wtf
+gunicorn
+httpx
+httpx
+orjson
+python-dotenv
+validators
+werkzeug
