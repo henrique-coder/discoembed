@@ -1,7 +1,7 @@
 # Built-in modules
 from http import HTTPStatus
 from pathlib import Path
-from typing import *
+from typing import Tuple
 
 # Third-party modules
 from flask import Flask, request, render_template_string
@@ -50,7 +50,7 @@ def make_embed_html(url: str, cover: str, width: int = None, height: int = None)
 
 # Setup API routes
 @app.route('/', methods=['GET'])
-@cache.cached(timeout=14400, make_cache_key=CacheTools.gen_cache_key)
+@cache.cached(timeout=10, make_cache_key=CacheTools.gen_cache_key)
 def embed() -> Tuple[render_template_string, HTTPStatus]:
     logger.info(f'GET request received from {request.remote_addr} ({request.user_agent})')
 
@@ -68,7 +68,7 @@ def embed() -> Tuple[render_template_string, HTTPStatus]:
 
     # Check if the cover is valid
     if not cover:
-        cover = 'https://i.imgur.com/wiAZIiu.png'
+        cover = 'https://i.imgur.com/mhRRd0g.png'
     elif not is_valid_url(cover, online_check=True):
         return render_template_string(make_embed_html(url, 'https://i.imgur.com/Cl6kMsz.png', width, height)), HTTPStatus.BAD_REQUEST
 
