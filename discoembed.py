@@ -1,10 +1,10 @@
 # Built-in modules
 from http import HTTPStatus
 from pathlib import Path
-from typing import Tuple
+from typing import Union, Tuple
 
 # Third-party modules
-from flask import Flask, request, render_template_string
+from flask import Flask, Response, request, jsonify, render_template_string
 from flask_caching import Cache
 from flask_compress import Compress
 from flask_cors import CORS
@@ -50,9 +50,12 @@ def make_embed_html(url: str, cover: str, width: int = None, height: int = None)
 
 # Setup API routes
 @app.route('/', methods=['GET'])
-@cache.cached(timeout=10, make_cache_key=CacheTools.gen_cache_key)
-def embed() -> Tuple[render_template_string, HTTPStatus]:
-    logger.info(f'GET request received from {request.remote_addr} ({request.user_agent})')
+@cache.cached(timeout=60, make_cache_key=CacheTools.gen_cache_key)
+def index() -> Tuple[Union[Response, render_template_string], HTTPStatus]:
+    logger.info(f'GET request received from ip {request.remote_addr} with user agent {request.user_agent}')
+
+    if str(request.user_agent).strip() != r'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)':
+        return jsonify({'error': 'Unauthorized access'}), HTTPStatus.UNAUTHORIZED
 
     # Get parameters from the URL
     url = request.args.get('url')
@@ -68,7 +71,7 @@ def embed() -> Tuple[render_template_string, HTTPStatus]:
 
     # Check if the cover is valid
     if not cover:
-        cover = 'https://i.imgur.com/mhRRd0g.png'
+        cover = 'https://i.imgur.com/WW2TJ68.png'
     elif not is_valid_url(cover, online_check=True):
         return render_template_string(make_embed_html(url, 'https://i.imgur.com/Cl6kMsz.png', width, height)), HTTPStatus.OK
 
