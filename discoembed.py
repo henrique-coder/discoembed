@@ -50,7 +50,7 @@ def make_embed_html(url: str, cover: str, width: int = None, height: int = None)
 
 # Setup API routes
 @app.route('/', methods=['GET'])
-@cache.cached(timeout=60, make_cache_key=CacheTools.gen_cache_key)
+@cache.cached(timeout=5, make_cache_key=CacheTools.gen_cache_key)
 def index() -> Tuple[Union[Response, render_template_string], HTTPStatus]:
     logger.info(f'GET request received from ip {request.remote_addr} with user agent {request.user_agent}')
 
