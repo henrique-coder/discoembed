@@ -62,15 +62,15 @@ def embed() -> Tuple[render_template_string, HTTPStatus]:
 
     # Check if the URL is valid
     if not url:
-        return render_template_string(make_embed_html('https://i.imgur.com/k9FrlEe.mp4', 'https://i.imgur.com/bUNtIgQ.png', 1280, 720)), HTTPStatus.BAD_REQUEST
+        return render_template_string(make_embed_html('https://i.imgur.com/k9FrlEe.mp4', 'https://i.imgur.com/bUNtIgQ.png', 1280, 720)), HTTPStatus.OK
     elif not is_valid_url(url, online_check=True):
-        return render_template_string(make_embed_html('https://i.imgur.com/bMGv6H5.mp4', 'https://i.imgur.com/kTj9dnk.png', 1280, 720)), HTTPStatus.BAD_REQUEST
+        return render_template_string(make_embed_html('https://i.imgur.com/bMGv6H5.mp4', 'https://i.imgur.com/kTj9dnk.png', 1280, 720)), HTTPStatus.OK
 
     # Check if the cover is valid
     if not cover:
         cover = 'https://i.imgur.com/mhRRd0g.png'
     elif not is_valid_url(cover, online_check=True):
-        return render_template_string(make_embed_html(url, 'https://i.imgur.com/Cl6kMsz.png', width, height)), HTTPStatus.BAD_REQUEST
+        return render_template_string(make_embed_html(url, 'https://i.imgur.com/Cl6kMsz.png', width, height)), HTTPStatus.OK
 
     # Check if the width and height are valid
     try:
