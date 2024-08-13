@@ -71,7 +71,7 @@ def index() -> Tuple[Union[Response, render_template_string], HTTPStatus]:
 
     # Check if the cover is valid
     if not cover:
-        cover = 'https://i.imgur.com/WW2TJ68.png'
+        cover = 'https://i.imgur.com/8ZkUMGK.png'
     elif not is_valid_url(cover, online_check=True):
         return render_template_string(make_embed_html(url, 'https://i.imgur.com/Cl6kMsz.png', width, height)), HTTPStatus.OK
 
