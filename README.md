@@ -30,10 +30,10 @@ Basically, the site has a main base url and 4 parameters, 1 of which is required
 
 Parameters:
 
-- **`url`** (required): The direct video url you want to generate the embed _(H265/HEVC encoded videos or MKV files are not supported)_.
-- **`cover`** (optional): The thumbnail image you want to use in the embed _(It must be a direct image url)_.
-- **`width`** (optional): The width of the video player _(Default is 1920)_.
-- **`height`** (optional): The height of the video player _(Default is 1080)_.
+- **`url`** (required): the direct video url you want to generate the embed _(H265/HEVC encoded videos or MKV files are not supported)_.
+- **`cover`** (optional): the thumbnail image you want to use in the embed _(It must be a direct image url)_.
+- **`width`** (optional): the width of the video player _(Default is 1920)_.
+- **`height`** (optional): the height of the video player _(Default is 1080)_.
 
 #### How was it done?
 
