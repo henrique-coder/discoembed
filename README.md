@@ -26,7 +26,7 @@
 
 Basically, the site has a main base url and 4 parameters, 1 of which is required. The parameters are used to generate the embed with the video player and the thumbnail image you want to use (warning: the site will only send a valid response to the bot that Discord uses to display the player to the end user).
 
-- API Base URL: https://discoembed.onrender.com.
+- Base API URL: https://discoembed.onrender.com.
 
 Parameters:
 
