@@ -44,7 +44,6 @@ Parameters:
 
 - [Python 3.12.4](https://www.python.org/downloads/release/python-3124) with pip.
 - [Git](https://gitforwindows.org) (optional).
-- Any browser that supports HTML5, CSS3 and JavaScript.
 
 ### Installation from source code
 
