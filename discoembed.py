@@ -31,6 +31,7 @@ logger.info('Talisman security headers enabled')
 
 # Setup Flask CSRF protection
 CSRFProtect(app)
+logger.info('CSRF protection enabled')
 
 # Setup Flask Compress for GZIP compression
 Compress(app)
@@ -98,4 +99,4 @@ if __name__ == '__main__':
 
     # Run the web server with the specified configuration
     logger.info(f'Starting web server at {config["flask"]["host"]}:{config["flask"]["port"]}')
-    app.run(debug=True, host=config['flask']['host'], port=config['flask']['port'], threaded=config['flask']['threadedServer'])
+    app.run(debug=False, host=config['flask']['host'], port=config['flask']['port'], threaded=config['flask']['threadedServer'])
