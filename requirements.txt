@@ -1,5 +1,4 @@
 faker
-faker
 flask
 flask-caching
 flask-compress
@@ -9,8 +8,6 @@ flask-talisman
 flask-wtf
 gunicorn
 httpx
-httpx
 orjson
-python-dotenv
 validators
 werkzeug
