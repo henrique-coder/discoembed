@@ -58,7 +58,7 @@ def index() -> Tuple[Union[Response, render_template_string], HTTPStatus]:
     if ',' in remote_addr:
         remote_addr = remote_addr.split(',')[0].strip()
 
-    logger.info(f'GET request received from ip {request.remote_addr} with user agent {request.user_agent}')
+    logger.info(f'GET request received from ip {remote_addr} with user agent {request.user_agent}')
 
     if str(request.user_agent).strip() != r'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)':
         return jsonify({'error': 'Unauthorized access'}), HTTPStatus.UNAUTHORIZED
