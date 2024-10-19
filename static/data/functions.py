@@ -42,7 +42,7 @@ def is_valid_url(url: str, online_check: bool = False) -> Optional[bool]:
 
     if online_check:
         try:
-            response = head(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, follow_redirects=True, timeout=10)
+            response = head(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}, follow_redirects=True, timeout=15)
             return True if response.is_success or response.is_redirect else None
         except HTTPError:
             return None
