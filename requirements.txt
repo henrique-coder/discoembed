@@ -1,4 +1,3 @@
-faker
 flask
 flask-caching
 flask-compress
