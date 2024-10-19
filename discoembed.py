@@ -42,7 +42,7 @@ CORS(app, resources={r'*': {'origins': '*'}})
 logger.info('CORS enabled')
 
 # Setup proxy fix for the Flask application
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=0, x_proto=1, x_host=1, x_port=1, x_prefix=1)
 
 
 # Function to create an embed HTML
@@ -51,8 +51,13 @@ def make_embed_html(url: str, cover: str, width: int = None, height: int = None)
 
 # Setup API routes
 @app.route('/', methods=['GET'])
-@cache.cached(timeout=5, make_cache_key=CacheTools.gen_cache_key)
+@cache.cached(timeout=10, make_cache_key=CacheTools.gen_cache_key)
 def index() -> Tuple[Union[Response, render_template_string], HTTPStatus]:
+    remote_addr = request.environ.get('HTTP_X_REAL_IP', request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr))
+
+    if ',' in remote_addr:
+        remote_addr = remote_addr.split(',')[0].strip()
+
     logger.info(f'GET request received from ip {request.remote_addr} with user agent {request.user_agent}')
 
     if str(request.user_agent).strip() != r'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)':
