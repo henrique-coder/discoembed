@@ -42,7 +42,7 @@ CORS(app, resources={r'*': {'origins': '*'}})
 logger.info('CORS enabled')
 
 # Setup proxy fix for the Flask application
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=0, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
 
 
 # Function to create an embed HTML
