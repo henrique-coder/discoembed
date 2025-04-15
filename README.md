@@ -26,7 +26,7 @@
 
 Basically, the site has a main base url and 4 parameters, 1 of which is required. The parameters are used to generate the embed with the video player and the thumbnail image you want to use (warning: the site will only send a valid response to the bot that Discord uses to display the player to the end user).
 
-- Base API URL: https://discoembed.onrender.com.
+- Base API URL: https://discoembed.vercel.app/v1
 
 Parameters:
 
@@ -37,13 +37,12 @@ Parameters:
 
 #### How was it done?
 
-- Built with [Python](https://www.python.org).
-- Uses [Flask](https://flask.palletsprojects.com) as the web framework.
+- Built with [Python](https://www.python.org)
+- Uses [FastAPI](https://fastapi.tiangolo.com) as the web framework
 
 #### Prerequisites
 
-- [Python 3.12.4](https://www.python.org/downloads/release/python-3124) with pip.
-- [Git](https://gitforwindows.org) (optional).
+- [Python](https://www.python.org)
 
 ### Installation from source code
 
@@ -55,11 +54,11 @@ git clone https://github.com/henrique-coder/discoembed.git
 cd discoembed
 
 # 3. Install the requirements
-pip install -U -r requirements.txt
+pip install --upgrade -r requirements.txt
 
 # 4. Run the web server
-python discoembed.py  # with Python (development)
-gunicorn -b 0.0.0.0:18500 discoembed:app  # with Gunicorn (production)
+uvicorn app.main:app --reload --host 0.0.0.0 --port 18500  # Development mode
+uvicorn app.main:app --host 0.0.0.0 --port 18500  # Production mode
 ```
 
 ### Contributing
