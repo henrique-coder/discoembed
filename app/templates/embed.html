@@ -1,0 +1,40 @@
+<!-- app/templates/embed.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:title" content="Video Embed">
+    <meta name="twitter:player" content="{{ url }}">
+    <meta name="twitter:player:width" content="{{ width }}">
+    <meta name="twitter:player:height" content="{{ height }}">
+    <meta name="twitter:image" content="{{ cover }}">
+    <!-- Open Graph data (optional, but good practice) -->
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="Video Embed">
+    <meta property="og:video:url" content="{{ url }}">
+    <meta property="og:video:secure_url" content="{{ url }}"> <!-- Assume HTTPS -->
+    <meta property="og:video:type" content="text/html"> <!-- Adjust if you know the video type -->
+    <meta property="og:video:width" content="{{ width }}">
+    <meta property="og:video:height" content="{{ height }}">
+    <meta property="og:image" content="{{ cover }}">
+    <meta property="og:image:secure_url" content="{{ cover }}"> <!-- Assume HTTPS -->
+
+    <title>Video Embed</title>
+    <style>
+        body { margin: 0; background-color: #111; display: flex; justify-content: center; align-items: center; height: 100vh; color: #eee; font-family: sans-serif; }
+        .message { text-align: center; }
+        a { color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <p>This page provides embed metadata for services like Discord.</p>
+        <p>Video URL: <a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ url }}</a></p>
+        <p>Cover Image: <a href="{{ cover }}" target="_blank" rel="noopener noreferrer">{{ cover }}</a></p>
+        <p>(Dimensions: {{ width }}x{{ height }})</p>
+    </div>
+</body>
+</html>
