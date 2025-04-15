@@ -1,12 +1,7 @@
-flask
-flask-caching
-flask-compress
-flask-cors
-flask-limiter
-flask-talisman
-flask-wtf
-gunicorn
+fastapi
 httpx
-orjson
+jinja2
+pydantic
+python-multipart
+uvicorn[standard]
 validators
-werkzeug
