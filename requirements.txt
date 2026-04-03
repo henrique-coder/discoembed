@@ -1,7 +1,0 @@
-fastapi
-httpx
-jinja2
-pydantic
-python-multipart
-uvicorn[standard]
-validators

@@ -1,65 +1,62 @@
-# Third-party modules
-from httpx import AsyncClient, RequestError
-from validators import ValidationError
-from validators import url as is_url_valid_format
+from __future__ import annotations
 
-# Local modules
-from app.core.logging_config import logger
+from curl_cffi.requests import AsyncSession
+from loguru import logger
+from pydantic import HttpUrl, ValidationError
 
 
-# Use a shared async client for performance
-async_client = AsyncClient(
-    headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-    },
-    follow_redirects=True,
-    timeout=15,
-)
+class _HttpClient:
+    def __init__(self) -> None:
+        self._session: AsyncSession | None = None
+
+    def _get_session(self) -> AsyncSession:
+        if self._session is None:
+            self._session = AsyncSession(
+                impersonate="chrome",
+                allow_redirects=True,
+                timeout=15,
+                verify=False,
+            )
+        return self._session
+
+    async def head(self, url: str) -> int:
+        session = self._get_session()
+        response = await session.head(url)
+        return response.status_code
+
+    async def close(self) -> None:
+        if self._session is not None:
+            await self._session.close()
+            self._session = None
+            logger.info("HTTP client closed")
 
 
-async def is_valid_url(url_to_check: str, online_check: bool = False) -> bool | None:
-    """
-    Asynchronously check if a URL is valid and optionally reachable online.
+http_client = _HttpClient()
 
-    Params:
-        url_to_check: The URL to check.
-        online_check: If True, check if the URL is reachable online. Defaults to False.
 
-    Returns:
-        True if valid (and reachable if checked), False if invalid format, None if unreachable online.
-    """
-
+def is_valid_url_format(url: str) -> bool:
     try:
-        if not is_url_valid_format(url_to_check):
-            logger.debug(f"URL format invalid: {url_to_check}")
-            return False
+        HttpUrl(url)
     except ValidationError:
-        logger.debug(f"URL validation error for: {url_to_check}")
+        logger.debug(f"Invalid URL format: {url}")
+        return False
+    else:
+        return True
+
+
+async def is_url_reachable(url: str) -> bool | None:
+    if not is_valid_url_format(url):
         return False
 
-    if online_check:
-        try:
-            response = await async_client.head(url_to_check)
+    try:
+        status_code = await http_client.head(url)
+    except Exception as exc:
+        logger.error(f"HTTP error checking URL {url}: {exc}")
+        return None
+    else:
+        if 200 <= status_code < 400:
+            logger.debug(f"URL reachable: {url} (status={status_code})")
+            return True
 
-            if response.is_success or response.is_redirect:
-                logger.debug(f"URL online check successful: {url_to_check} (Status: {response.status_code})")
-                return True
-            else:
-                logger.warning(f"URL online check failed: {url_to_check} (Status: {response.status_code})")
-                return None
-        except RequestError as e:
-            logger.error(f"HTTP request error checking URL {url_to_check}: {e}")
-            return None
-        except Exception as e:
-            logger.error(f"Unexpected error checking URL {url_to_check}: {e}")
-            return None
-
-    logger.debug(f"URL format valid (online check skipped): {url_to_check}")
-    return True
-
-
-async def close_httpx_client() -> None:
-    """Closes the shared httpx client."""
-
-    await async_client.aclose()
-    logger.info("HTTPX AsyncClient closed.")
+        logger.warning(f"URL unreachable: {url} (status={status_code})")
+        return None

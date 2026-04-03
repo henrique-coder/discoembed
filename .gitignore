@@ -1,17 +1,20 @@
-# IDE
-.idea
-.venv
-
-# Cache
-__pycache__
-.ruff_cache
-.pytest_cache
-
-# Directories
-.debug
+# Folders
+.idea/
+.vscode/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+site/
+.debug/
 
 # Files
-# ...
+example*.py
 
 # Extensions
 *.env
+*.log
+*.tmp
+*.bak
+.uv_cache/

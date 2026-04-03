@@ -1,41 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="player">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:player" content="{{ url }}">
-    <meta name="twitter:player:width" content="{{ width }}">
-    <meta name="twitter:player:height" content="{{ height }}">
-    <meta name="twitter:image" content="{{ cover }}">
+    <meta name="twitter:card" content="player" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:player" content="{{ url }}" />
+    <meta name="twitter:player:width" content="{{ width }}" />
+    <meta name="twitter:player:height" content="{{ height }}" />
+    <meta name="twitter:image" content="{{ cover }}" />
 
-    <!-- Open Graph data -->
-    <meta property="og:type" content="video.other">
-    <meta property="og:title" content="">
-    <meta property="og:video:url" content="{{ url }}">
-    <meta property="og:video:secure_url" content="{{ url }}">
-    <meta property="og:video:type" content="text/html">
-    <meta property="og:video:width" content="{{ width }}">
-    <meta property="og:video:height" content="{{ height }}">
-    <meta property="og:image" content="{{ cover }}">
-    <meta property="og:image:secure_url" content="{{ cover }}">
+    <meta property="og:type" content="video.other" />
+    <meta property="og:title" content="" />
+    <meta property="og:video:url" content="{{ url }}" />
+    <meta property="og:video:secure_url" content="{{ url }}" />
+    <meta property="og:video:type" content="text/html" />
+    <meta property="og:video:width" content="{{ width }}" />
+    <meta property="og:video:height" content="{{ height }}" />
+    <meta property="og:image" content="{{ cover }}" />
+    <meta property="og:image:secure_url" content="{{ cover }}" />
 
     <title>{{ APP_NAME }}</title>
     <style>
-        body { margin: 0; background-color: #111; display: flex; justify-content: center; align-items: center; height: 100vh; color: #eee; font-family: sans-serif; }
-        .message { text-align: center; }
-        a { color: #007bff; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #0d1117;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #c9d1d9;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+      }
+      .container {
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+      }
+      .container p {
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+      }
+      a {
+        color: #58a6ff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .dim {
+        color: #8b949e;
+        font-size: 0.875rem;
+      }
     </style>
-</head>
-<body>
-    <div class="message">
-        <p>This page provides embed metadata for services like Discord.</p>
-        <p>Video URL: <a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ url }}</a></p>
-        <p>Cover Image: <a href="{{ cover }}" target="_blank" rel="noopener noreferrer">{{ cover }}</a></p>
-        <p>(Dimensions: {{ width }}x{{ height }})</p>
+  </head>
+  <body>
+    <div class="container">
+      <p>This page provides embed metadata for services like Discord.</p>
+      <p>
+        Video:
+        <a href="{{ url }}" target="_blank" rel="noopener noreferrer"
+          >{{ url }}</a
+        >
+      </p>
+      <p>
+        Cover:
+        <a href="{{ cover }}" target="_blank" rel="noopener noreferrer"
+          >{{ cover }}</a
+        >
+      </p>
+      <p class="dim">{{ width }}&times;{{ height }}</p>
     </div>
-</body>
+  </body>
 </html>

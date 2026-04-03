@@ -1,24 +1,27 @@
-# Third-party modules
+from __future__ import annotations
+
 from fastapi import APIRouter, status
 from pydantic import BaseModel
+
+from app.core import settings
 
 
 router = APIRouter()
 
 
-class HealthStatus(BaseModel):
+class HealthResponse(BaseModel):
     status: str = "ok"
+    service: str = settings.app_name
+    base_url: str = settings.base_url
 
 
 @router.get(
     "/status",
-    response_model=HealthStatus,
+    response_model=HealthResponse,
     status_code=status.HTTP_200_OK,
-    tags=["Health"],
-    summary="Perform a Health Check",
+    summary="Health Check",
     response_description="Returns the health status of the API.",
 )
-async def health_check() -> HealthStatus:
-    """Simple health check endpoint. Returns 'ok' status."""
+async def health_check() -> HealthResponse:
 
-    return HealthStatus(status="ok")
+    return HealthResponse()
